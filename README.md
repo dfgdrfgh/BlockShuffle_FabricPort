@@ -1,190 +1,35 @@
-# 🧱 Block Shuffle — Minecraft Mini-Game Plugin
+# Block Shuffle — Fabric port
 
-Block Shuffle is a fast-paced, competitive Minecraft minigame inspired by popular YouTube challenges.
-Players are given a random block every round and must stand on it before the timer runs out — or they’re eliminated.
+Block Shuffle is a server-side Minecraft minigame. At the beginning of each round, every participant gets a block to find and stand on. Participants who do not complete their challenge before time runs out are eliminated. The last remaining participant wins. This port is based on the Paper plugin in this repository; its original Kotlin files are retained in [`paper-source/`](paper-source/).
 
-Perfect for:
-✔ Survival servers
-✔ Events & tournaments
-✔ SMP mini-games
-✔ Content creators
+## Install
 
----
+1. Use a Fabric server for your Minecraft version. Install Fabric API for that same version.
+2. Download the matching Block Shuffle Fabric JAR from a successful [Build Fabric versions](../../actions/workflows/build.yml) workflow run, or build it yourself below.
+3. Put the JAR in the server's `mods` directory. Do not install the Paper plugin alongside it.
+4. Start the server. Settings are created at `config/blockshuffle/config.yml`.
 
-## 🌟 Features
+Each build targets one exact Minecraft release. The build matrix covers 1.21 through 1.21.11 (including every numbered 1.21.x release) and 26.2. Use Java 21 for 1.21.x and Java 25 for 26.2. Clients can join with an unmodified game.
 
-- 🎯 **Random Block Challenges**
-  - Each player receives a unique block every round.
+## Commands
 
-- 🧠 **Smart Difficulty Scaling**
-  - Difficulty increases as rounds progress.
-  - Fewer players = harder challenges.
+| Command | Purpose |
+| --- | --- |
+| `/bs start` | Start a game with the players currently online. |
+| `/bs quit` | Leave the current game. |
+| `/bs help` | Show commands. |
+| `/bs about` | Show information about the mod. |
+| `/bs stop` | End a game (operator). |
+| `/bs reload` | Reload the configuration (operator). |
 
-- ⚖️ **Weighted Block System**
-  - Common blocks appear more often.
-  - Rare blocks stay rare.
-  - Fully configurable.
+`/blockshuffle` is the long form of `/bs`. By default, at least two players must be online to start; you can change `min-players` in the configuration. Players joining after a game starts wait until the next game.
 
-- 🧱 **Dimension Control**
-  - Enable/disable Overworld, Nether, or End blocks.
+## Build
 
-- ❌ **Automatic Elimination**
-  - Fail to find your block → eliminated.
-  - Last player standing wins.
-
-- ⚡ **Optimized for Paper**
-  - Lightweight
-  - Lag-free
-  - Event-based logic
-
----
-
-## 🎮 How It Works
-
-1. Run:
+```sh
+./gradlew -PmcVersion=1.21.11 clean build
 ```
 
-/bs start
+Change `mcVersion` to the exact target release; for example, `1.21.1` or `26.2`. The completed, remapped mod JAR is in `build/libs/` (the `-sources.jar` file is only source code). Java 25 is required to build 26.2, and Java 21 suffices for 1.21.x. The included GitHub Actions workflow builds every target individually and uploads each JAR as an artifact.
 
-```
-
-2. Each player receives a random block.
-
-3. Players must stand on that block before the timer ends.
-
-4. Players who fail are eliminated.
-
-5. Rounds continue until one player remains.
-
-
-❤️ Why Use Block Shuffle?
-
-✔ Clean UI
-✔ Competitive & fun
-✔ Highly customizable
-✔ Lightweight
-✔ Perfect for events
-✔ Actively developed
-
----
-
-## ⚙️ Configuration
-
-Everything is configurable via `config.yml`.
-
-### Example:
-```yaml
-round-time: 300
-min-players: 2
-allow-bossbar: true
-
-allow:
-  overworld: true
-  nether: true
-  end: false
-
-messages:
-  start: "&a🟢 Block Shuffle started!"
-  win: "&6🏆 {player} won the game!"
-  fail: "&cYou failed this round!"
-
-weight-categories:
-  common-blocks: 10
-  building-blocks: 8
-  decorative: 7
-  common-ores: 6
-  nether-blocks: 5
-  default: 5
-  uncommon-ores: 4
-  end-blocks: 3
-  rare-ores: 2
-  ultra-rare: 1
-
-weights:
-  # STONE: 10
-  # DIRT: 9
-
-difficulty:
-  weight-reduction-per-round: 0.15
-
-blacklist:
-  - END_PORTAL_FRAME
-  - SPAWNER
-  - BARRIER
-  - DEEPSLATE_EMERALD_ORE
-  - ANCIENT_DEBRIS
-  - LODESTONE
-  - COMMAND_BLOCK
-  - STRUCTURE_BLOCK
-  // more like player heads
-
-````
-
----
-
-## 🧠 Smart Difficulty System
-
-✔ Early rounds → easy blocks
-✔ Mid rounds → moderate challenge
-✔ Late rounds → rare & difficult blocks
-
-The game adapts automatically to keep gameplay fair and exciting.
-
----
-
-## 📦 Installation
-
-1. Download the plugin `.jar`
-2. Place it in `/plugins`
-3. Restart your server
-4. Edit `config.yml`
-5. Run `/bs start`
-
----
-
-## 🚀 Planned Features
-
-### 🔵 Future Updates
-
-* Difficulty presets (Easy / Normal / Hardcore)
-* Scoreboard support
-* Per-world games
-* Random teleport on round start
-* Anti-cheat protections
-
-### 🔴 Long-Term Goals
-
-* Player statistics
-* Leaderboards
-* Multiple game arenas
-* Power-ups & special rounds
-* GUI-based configuration
-* Database support (SQLite / MySQL)
-
----
-
-## 🏆 Why Use Block Shuffle?
-
-✔ Fun & competitive
-✔ Easy to configure
-✔ Works great for events
-✔ Scales with player skill
-✔ Lightweight & optimized
-
----
-
-## ❤️ Support & Community
-
-⭐ Star the project
-🐞 Report bugs
-💡 Suggest features
-
----
-
-### 🤝 Sponsor
-
-[GitHub Sponsors](https://github.com/sponsors/hellofaizan)
-
-### 💬 Discord
-
-[https://discord.gg/vUHMxPvege](https://discord.gg/vUHMxPvege)
+The Fabric build uses Yarn mappings for 1.21.x and Mojang's official names for 26.2. The two command implementations account for Minecraft's permission API changes. The `config.yml` format, blacklist, weighted blocks, round length, boss bar toggle, and custom messages come from the Paper plugin.
