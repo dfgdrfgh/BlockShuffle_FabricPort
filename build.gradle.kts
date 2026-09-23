@@ -45,7 +45,8 @@ sourceSets {
         java.setSrcDirs(if (minecraftVersion == "26.2") {
             listOf("src/shared/java", "src/26_2/java")
         } else {
-            listOf("src/shared/java", "src/main/java", if (minecraftVersion == "1.21.11") "src/modern/java" else "src/legacy/java")
+            listOf("src/shared/java", "src/main/java", if (minecraftVersion == "1.21.11") "src/modern/java" else "src/legacy/java",
+                if (minecraftVersion in setOf("1.21.6", "1.21.7", "1.21.8")) "src/world_middle/java" else "src/world_regular/java")
         })
     }
 }

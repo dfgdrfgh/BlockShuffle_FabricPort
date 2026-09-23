@@ -181,7 +181,7 @@ public final class GameManager {
             ServerPlayerEntity player = player(data.id);
             if (player == null) continue;
             BlockPos below = player.getBlockPos().down();
-            if (player.getEntityWorld().getBlockState(below).isOf(data.target)) {
+            if (WorldAccess.blockAt(player, below).isOf(data.target)) {
                 data.completed = true;
                 player.sendMessage(Text.literal("✔ You are standing on the given block!").formatted(Formatting.GREEN), false);
             }
