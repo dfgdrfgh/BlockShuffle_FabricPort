@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "blockshuffle",
+  "version": "${version}",
+  "name": "Block Shuffle",
+  "description": "Fabric port of the Block Shuffle Paper minigame",
+  "authors": ["Mohammad Faizan"],
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.minecraft.mods.BlockShuffle"]
+  },
+  "depends": {
+    "fabricloader": ">=0.17.3",
+    "minecraft": "${mcVersion}",
+    "java": ">=${javaVersion}",
+    "fabric-api": "*"
+  }
+}
