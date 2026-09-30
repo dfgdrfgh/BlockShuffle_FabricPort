@@ -137,8 +137,7 @@ The game adapts automatically to keep gameplay fair and exciting.
 1. Download the mod `.jar`
 2. Place it in `/mods`
 3. launch the game
-4. Edit `config.yml`
-5. Run `/bs start`
+4. Run `/bs start`
 
 ---
 
