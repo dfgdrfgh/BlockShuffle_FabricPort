@@ -134,32 +134,11 @@ The game adapts automatically to keep gameplay fair and exciting.
 
 ## 📦 Installation
 
-1. Download the plugin `.jar`
-2. Place it in `/plugins`
-3. Restart your server
+1. Download the mod `.jar`
+2. Place it in `/mods`
+3. launch the game
 4. Edit `config.yml`
 5. Run `/bs start`
-
----
-
-## 🚀 Planned Features
-
-### 🔵 Future Updates
-
-* Difficulty presets (Easy / Normal / Hardcore)
-* Scoreboard support
-* Per-world games
-* Random teleport on round start
-* Anti-cheat protections
-
-### 🔴 Long-Term Goals
-
-* Player statistics
-* Leaderboards
-* Multiple game arenas
-* Power-ups & special rounds
-* GUI-based configuration
-* Database support (SQLite / MySQL)
 
 ---
 
